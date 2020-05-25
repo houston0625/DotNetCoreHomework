@@ -18,6 +18,8 @@ namespace hw_api.Models
         public byte[] RowVersion { get; set; }
         public bool? IsDeleted { get; set; }
 
+        public DateTime? DateModified { get; set; }
+
         public virtual Person Instructor { get; set; }
         public virtual ICollection<Course> Course { get; set; }
     }
