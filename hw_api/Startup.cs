@@ -29,7 +29,12 @@ namespace hw_api
         {
             // using Microsoft.EntityFrameworkCore;
             services.AddDbContext<ContosoUniversityContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                        .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                }
+            );
             
             services.AddControllers();
         }
