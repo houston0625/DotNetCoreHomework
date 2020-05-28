@@ -26,9 +26,7 @@ namespace hw_api.Models
                     entry.CurrentValues.SetValues(new { ModifiedOn = DateTime.Now });
                 }
             }
-
             return base.SaveChanges();
-
         }
     }
 }
