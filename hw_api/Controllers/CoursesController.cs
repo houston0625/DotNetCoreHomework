@@ -37,6 +37,9 @@ namespace hw_api.Controllers
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<Course>> GetCourseAsync(int id)
         {
             var course = await _context.Course.FindAsync(id);
@@ -53,6 +56,10 @@ namespace hw_api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> PutCourseAsync(int id, Course course)
         {
             if (id != course.CourseId)
@@ -85,9 +92,11 @@ namespace hw_api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<Course>> PostCourseAsync(Course course)
         {
-            _context.Course.Add(course);
+            await _context.Course.AddAsync(course);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCourseAsync", new { id = course.CourseId }, course);
@@ -95,6 +104,9 @@ namespace hw_api.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<Course>> DeleteCourseAsync(int id)
         {
             var course = await _context.Course.FindAsync(id);
